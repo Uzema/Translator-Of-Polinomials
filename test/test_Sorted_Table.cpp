@@ -64,6 +64,16 @@ TEST(SortedTable, ThrowWhenEraseNotExistingElement) {
 	ASSERT_ANY_THROW(t.erase("ab"));
 }
 
+TEST(SortedTable, IteratorCycle) {
+	SortedTable<std::string, polynom> t;
+	polynom p = polynom(monom(1, 100));
+	t.insert("abc", p);
+	t.insert("abd", p);
+	t.insert("abb", p);
+	for(SortedTable<std::string, polynom>::iterator it = t.begin(); it != t.end(); it++)
+		ASSERT_NO_THROW(*it);
+}
+
 TEST(SortedTable, StressTest) {
 	SortedTable<int, polynom> t;
 	polynom p = polynom(monom(1, 100));

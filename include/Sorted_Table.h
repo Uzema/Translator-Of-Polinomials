@@ -2,7 +2,6 @@
 #include<vector>
 #include"Polynomial.h"
 
-//TODO: write throw 
 
 template <class Tkey, class Tvalue>
 class SortedTable {
@@ -14,14 +13,30 @@ public:
 	public:
 		std::pair<Tkey, Tvalue>* ptr;
 
-		explicit iterator(std::pair<Tkey, Tvalue>* p) : ptr(p) { }
+		iterator(std::pair<Tkey, Tvalue>* p) : ptr(p) {}
 
 		iterator& operator++() {
-			return ptr++;
+			ptr++;
+			return *ptr;
 		}
+
+		iterator& operator++(int) {
+			iterator tmp = *this;
+			ptr++;
+			return tmp;
+		}
+
 		iterator& operator--() {
-			return ptr--;
+			ptr--
+			return *ptr;
 		}
+
+		iterator& operator--(int) {
+			iterator tmp = *ptr;
+			ptr--;
+			return *tmp;
+		}
+
 		bool operator==(const iterator& it) const{
 			return ptr == it.ptr;
 		}
@@ -37,10 +52,14 @@ public:
 	};
 
 	iterator begin() {
+		if (table.empty())
+			return nullptr;
 		return iterator(&table[0]);
 	}
 	iterator end() {
-		return iterator(nullptr);
+		if (table.empty())
+			return nullptr;
+		return iterator(&table[table.size() - 1])++;
 	}
 	
 	void insert(Tkey key, Tvalue val) {
@@ -54,7 +73,7 @@ public:
 				i--;
 			}
 			else if (table[i - 1].first == table[i].first)
-				throw " ";
+				throw "This value already exists";
 			else
 				break;
 		}
@@ -78,7 +97,7 @@ public:
 	iterator erase(const Tkey& key) {
 		auto it = find(key);
 		if (it == end())
-			throw " ";
+			throw "The value does not exist";
 		for (int i = 0; i < table.size();i++) {
 			if (table[i].first == key) {
 				table.erase(table.begin() + i);
