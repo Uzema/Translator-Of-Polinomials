@@ -1,0 +1,5 @@
+C:/Users/mstik/Desktop/labs/Translator-Of-Polinomials/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/mstik/Desktop/labs/Translator-Of-Polinomials/build/CMakeFiles/ZERO_CHECK.dir
+C:/Users/mstik/Desktop/labs/Translator-Of-Polinomials/build/src/CMakeFiles/Translator-Of-Polynomials.dir
+C:/Users/mstik/Desktop/labs/Translator-Of-Polinomials/build/gtest/CMakeFiles/gtest.dir
+C:/Users/mstik/Desktop/labs/Translator-Of-Polinomials/build/test/CMakeFiles/test_Translator-Of-Polynomials.dir

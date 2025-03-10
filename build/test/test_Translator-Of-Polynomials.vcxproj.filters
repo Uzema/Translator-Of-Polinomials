@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\mstik\Desktop\labs\Translator-Of-Polinomials\test\test_Hash_Table1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\mstik\Desktop\labs\Translator-Of-Polinomials\test\test_Hash_Table2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\mstik\Desktop\labs\Translator-Of-Polinomials\test\test_Sorted_Table.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\mstik\Desktop\labs\Translator-Of-Polinomials\test\test_Tree1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\mstik\Desktop\labs\Translator-Of-Polinomials\test\test_Tree2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\mstik\Desktop\labs\Translator-Of-Polinomials\test\test_Unsorted_Table.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\mstik\Desktop\labs\Translator-Of-Polinomials\test\test_main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\mstik\Desktop\labs\Translator-Of-Polinomials\test\test_monom.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\mstik\Desktop\labs\Translator-Of-Polinomials\test\test_polynom.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\mstik\Desktop\labs\Translator-Of-Polinomials\test\test_tlist.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\mstik\Desktop\labs\Translator-Of-Polinomials\test\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{01537307-609F-38A8-83AF-F56064558532}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
