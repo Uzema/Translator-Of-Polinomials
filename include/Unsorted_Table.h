@@ -62,6 +62,7 @@ public:
 	iterator begin() {
 		return iterator(table.empty() ? nullptr : &table[0]);
 	}
+
 	iterator end() {
 		return iterator(table.empty() ? nullptr : &table[0] + table.size());
 	}
