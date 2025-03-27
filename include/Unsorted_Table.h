@@ -104,7 +104,7 @@ public:
 		int index = it.get_ptr() - &table[0];
 		table.erase(table.begin() + index);
 		return iterator(index < table.size() ? &table[index] : nullptr);
-
+		//can use swap and pop back to make erase(it) O(1)
 	}
 
 	std::pair<Tkey, Tvalue> operator[](int ind) {
