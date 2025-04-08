@@ -313,7 +313,31 @@ private:
 		return (1 + countSize(curr->left) + countSize(curr->right));
 	}
 
+	Node* testing(Node* curr) {
+		if (!curr) return nullptr;
+
+		if (!(getBalance(curr) == -1 || getBalance(curr) == 0 || getBalance(curr) == 1)) {
+			throw "AVLTree is not properly balanced";
+		}
+
+		if (curr->left) {
+			if (curr->key <= curr->left->key) throw "Is not a search tree";
+		}
+
+		if (curr->right) {
+			if (curr->key >= curr->right->key) throw "Is not a search tree";
+		}
+
+		curr->left = testing(curr->left);
+		curr->right = testing(curr->right);
+		return curr;
+	}
+
 public:
+
+	void testAVLProperties() {
+		root = testing(root);
+	}
 
 	AVLTree() {
 
@@ -365,7 +389,7 @@ public:
 		return find(key)->value;
 	}
 
-	int getTreeHeight() {
+	int getHeight() {
 		return root->height;
 	}
 };
