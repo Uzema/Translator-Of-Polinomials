@@ -5,16 +5,17 @@
 class TreeTesting : public::testing::Test {
 protected:
 	virtual void SetUp() {
-		t.insert(5, 1);
-		t.insert(6, 1);
-		t.insert(4, 1);
+		t.insert(5, p);
+		t.insert(6, p);
+		t.insert(4, p);
 	}
 
 	virtual void TearDown() {
 		t.testAVLProperties();
 	}
 
-	AVLTree<float, int> t;
+	AVLTree<float, polynom> t;
+	polynom p = polynom(monom(1, 100));
 };
 
 
@@ -24,23 +25,25 @@ TEST(AVLTree, CanCreateTree) {
 }
 
 TEST(AVLTree, CorrectSize) {
-	AVLTree<int, int> t;
-	t.insert(5, 1);
-	t.insert(6, 1);
-	t.insert(4, 1);
-	t.insert(7, 1);
-	t.insert(8, 1);
+	AVLTree<int, polynom> t;
+	polynom p = polynom(monom(1, 100));
+	t.insert(5, p);
+	t.insert(6, p);
+	t.insert(4, p);
+	t.insert(7, p);
+	t.insert(8, p);
 	EXPECT_EQ(5, t.size());
 }
 
 TEST(AVLTree, EmptyTree1) {
-	AVLTree<int, int> t;
+	AVLTree<int, polynom> t;
 	EXPECT_EQ(true, t.empty());
 }
 
 TEST(AVLTree, EmptyTree2) {
-	AVLTree<int, int> t;
-	t.insert(5, 1);
+	AVLTree<int, polynom> t;
+	polynom p = polynom(monom(1, 100));
+	t.insert(5, p);
 	EXPECT_EQ(false, t.empty());
 }
 
@@ -51,50 +54,50 @@ TEST(AVLTree, CanGetValue) {
 }
 
 TEST_F(TreeTesting, CantInsertUsingTheSameKey) {
-	ASSERT_ANY_THROW(t.insert(5, 1));
+	ASSERT_ANY_THROW(t.insert(5, p));
 }
 
 TEST_F(TreeTesting, RotateRight1) {//h+2(h+1 h+1) h
-	t.insert(2, 1);
-	t.insert(4.2, 1);
-	t.insert(1, 1);
-	t.insert(4.5, 1);
+	t.insert(2, p);
+	t.insert(4.2, p);
+	t.insert(1, p);
+	t.insert(4.5, p);
 	EXPECT_EQ(3, t.getHeight());
 }
 
 TEST_F(TreeTesting, RotateRight2) {//h+2(h+1 h) h
-	t.insert(2, 1);
-	t.insert(4.2, 1);
-	t.insert(1, 1);
+	t.insert(2, p);
+	t.insert(4.2, p);
+	t.insert(1, p);
 	EXPECT_EQ(2, t.getHeight());
 }
 
 TEST_F(TreeTesting, BigRotateRight) {//h+2(h h+1) h
-	t.insert(2, 1);
-	t.insert(4.2, 1);
-	t.insert(4.5, 1);
+	t.insert(2, p);
+	t.insert(4.2, p);
+	t.insert(4.5, p);
 	EXPECT_EQ(2, t.getHeight());
 }
 
 TEST_F(TreeTesting, RotateLeft1) {//h h+2(h+1 h+1)
-	t.insert(7, 1);
-	t.insert(5.5, 1);
-	t.insert(5.2, 1);
-	t.insert(8, 1);
+	t.insert(7, p);
+	t.insert(5.5, p);
+	t.insert(5.2, p);
+	t.insert(8, p);
 	EXPECT_EQ(2, t.getHeight());
 }
 
 TEST_F(TreeTesting, RotateLeft2) {//h h+2(h h+1)
-	t.insert(7, 1);
-	t.insert(5.5, 1);
-	t.insert(8, 1);
+	t.insert(7, p);
+	t.insert(5.5, p);
+	t.insert(8, p);
 	EXPECT_EQ(2, t.getHeight());
 }
 
 TEST_F(TreeTesting, BigRotateLeft) {//h h+2(h+1 h)
-	t.insert(7, 1);
-	t.insert(5.5, 1);
-	t.insert(5.2, 1);
+	t.insert(7, p);
+	t.insert(5.5, p);
+	t.insert(5.2, p);
 	EXPECT_EQ(2, t.getHeight());
 }
 
@@ -108,55 +111,63 @@ TEST_F(TreeTesting, EraseThrowsWhenTryToEraseNotExisting) {
 }
 
 TEST_F(TreeTesting, EraseDoesntBreakBalance1) {
-	t.insert(2, 1);
-	t.insert(4.2, 1);
-	t.insert(1, 1);
-	t.insert(4.5, 1);
+	t.insert(2, p);
+	t.insert(4.2, p);
+	t.insert(1, p);
+	t.insert(4.5, p);
 	t.erase(6);
 	EXPECT_EQ(2, t.getHeight());
 }
 
 TEST_F(TreeTesting, EraseDoesntBreakBalance2) {
-	t.insert(2, 1);
-	t.insert(4.2, 1);
-	t.insert(1, 1);
-	t.insert(4.5, 1);
+	t.insert(2, p);
+	t.insert(4.2, p);
+	t.insert(1, p);
+	t.insert(4.5, p);
 	t.erase(5);
 	EXPECT_EQ(2, t.getHeight());
 }
 
 TEST_F(TreeTesting, EraseDoesntBreakBalance3) {
-	t.insert(7, 1);
-	t.insert(5.5, 1);
-	t.insert(5.2, 1);
-	t.insert(8, 1);
+	t.insert(7, p);
+	t.insert(5.5, p);
+	t.insert(5.2, p);
+	t.insert(8, p);
 	t.erase(4);
 	EXPECT_EQ(2, t.getHeight());
 }
 
 TEST_F(TreeTesting, EraseDoesntBreakBalance4) {
-	t.insert(7, 1);
-	t.insert(5.5, 1);
-	t.insert(5.2, 1);
-	t.insert(8, 1);
+	t.insert(7, p);
+	t.insert(5.5, p);
+	t.insert(5.2, p);
+	t.insert(8, p);
 	t.erase(5);
 	EXPECT_EQ(2, t.getHeight());
 }
 
-TEST_F(TreeTesting, Copy) {
-	AVLTree<float, int> ot(t);
+TEST(AVLTree, Copy) {
+	AVLTree<float, int> t;
+	t.insert(5, 123);
+	t.insert(6, 234);
+	t.insert(4, 345);
 
-	EXPECT_EQ(1, ot.getValue(5));
-	EXPECT_EQ(1, ot.getValue(6));
-	EXPECT_EQ(1, ot.getValue(4));
+	AVLTree<float, int> ot(t);
+	EXPECT_EQ(123, ot.getValue(5));
+	EXPECT_EQ(234, ot.getValue(6));
+	EXPECT_EQ(345, ot.getValue(4));
 }
 
-TEST_F(TreeTesting, CopyAssignment) {
-	AVLTree<float, int> ot = t;
+TEST(AVLTree, CopyAssignment) {
+	AVLTree<float, int> t;
+	t.insert(5, 123);
+	t.insert(6, 234);
+	t.insert(4, 345);
 
-	EXPECT_EQ(1, ot.getValue(5));
-	EXPECT_EQ(1, ot.getValue(6));
-	EXPECT_EQ(1, ot.getValue(4));
+	AVLTree<float, int> ot = t;
+	EXPECT_EQ(123, ot.getValue(5));
+	EXPECT_EQ(234, ot.getValue(6));
+	EXPECT_EQ(345, ot.getValue(4));
 }
 
 TEST(AVLTree, StressTest) {
@@ -174,5 +185,3 @@ TEST(AVLTree, StressTest) {
 	}
 	ASSERT_NO_THROW();
 }
-
-
