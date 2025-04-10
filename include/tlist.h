@@ -63,6 +63,7 @@ public:
 	T& operator[](int index);
 	size_t size();
 	void print();
+	bool empty();
 
 	node* insert(T val, node* pr) {
 		node* tmp = new node;
@@ -172,6 +173,11 @@ inline size_t List<T>::size() {
 		cur = cur->next;
 	}
 	return s;
+}
+
+template<class T>
+inline bool List<T>::empty() {
+	return size() == 0;
 }
 
 template <class T>
