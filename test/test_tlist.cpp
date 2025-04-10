@@ -93,6 +93,17 @@ TEST(tlist, can_give_size_of_empty_list) {
 	EXPECT_EQ(0, l.size());
 }
 
+TEST(tlist, empty_list) {
+	List<int> l;
+	EXPECT_EQ(true, l.empty());
+}
+
+TEST(tlist, not_empty_list) {
+	List<int> l;
+	l.insert(1, l.get_head());
+	EXPECT_EQ(false, l.empty());
+}
+
 TEST(tlist, can_find_element) {
 	List<int> l;
 	l.insert(3, l.get_head());
