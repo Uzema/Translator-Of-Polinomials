@@ -1,5 +1,4 @@
 ﻿#pragma once
-#include"Polynomial.h"
 
 template <class Tkey, class Tvalue>
 class BRtree {

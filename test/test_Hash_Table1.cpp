@@ -62,7 +62,7 @@ TEST(HashTable, iteratorCycleInHashTable) {
 }
 
 TEST(HashTable, stressTest) {
-	HashTable<std::string, polynom> h(262127);
+	HashTable<std::string, polynom> h(524287);
 	polynom p = polynom(monom(1, 100));
 	std::string chars1 = "ABCDEFGHIJKLMNTUVWXY";
 	std::string chars2 = "abcdefgmnopqrstuvwxyz";

@@ -86,17 +86,21 @@ polynom polynom::operator+(polynom& p) {
 			continue;
 		}
 		while (*j < *i) {
+			if (j->GetCoefficient() == 0 && j->GetDegree() == 0)
+				break;
 			res.l.insert(*j, k.get_node());
 			k++;
 			j++;
 		}
-		if (*i < *j) {
+		//if (j != this->l.end() && *i < *j) {
 			res.l.insert(*i, k.get_node());
 			k++;
-		}
+		//}
 	}
 
 	while (j != this->l.end()) {
+		if (j->GetCoefficient() == 0 && j->GetDegree() == 0)
+			break;
 		res.l.insert(*j, k.get_node());
 		j++;
 		k++;
@@ -150,17 +154,21 @@ polynom polynom::operator-(polynom& p) {
 			continue;
 		}
 		while (*j < *i) {
+			if (j->GetCoefficient() == 0 && j->GetDegree() == 0)
+				break;
 			res.l.insert(*j, k.get_node());
 			k++;
 			j++;
 		}
-		if (*i < *j) {
+		//if (*i < *j) {
 			res.l.insert(*i * (-1), k.get_node());
 			k++;
-		}
+		//}
 	}
 
 	while (j != this->l.end()) {
+		if (j->GetCoefficient() == 0 && j->GetDegree() == 0)
+			break;
 		res.l.insert(*j, k.get_node());
 		j++;
 		k++;
@@ -251,5 +259,145 @@ polynom& polynom::operator/=(double c) {
 	if (abs(c) < 0.0000000001) throw "division by zero";
 	for (List<monom>::iterator i = this->l.begin(); i != this->l.end(); i++)
 		*i /= c;
+	return *this;
+}
+
+polynom& polynom::parser(std::string s) {
+	if (s.empty())
+		return *this;
+	std::vector<std::string> v;
+
+	for (int i = 0; i < s.size(); i++) {
+		if (s[i] == ' ') continue;
+
+		if (s[i] == '+' || s[i] == '*' || s[i] == '-' || s[i] == '^' ||
+			s[i] == 'x' || s[i] == 'y' || s[i] == 'z')
+			v.push_back(std::string(1, s[i]));
+
+		else if (s[i] >= 48 && s[i] <= 57) {
+			int k = 1;
+			std::string num;
+
+			while (s[i] >= 48 && s[i] <= 57 || s[i] == ',' || s[i] == '.') {
+				num += s[i];
+				if (s[i] == ',' || s[i] == '.')
+					k--;
+				if (k < 0) throw std::exception("Incorrect input");
+				i++;
+			}
+			if (!num.empty()) {
+				v.push_back(num);
+				i--;
+			}
+		}
+		else throw std::exception("Incorrect input");
+	}
+
+	enum class state { S, Op, Num, Var, Exp, Mul, Error };
+	state ka = state::S;
+	for (int i = 0; i < v.size(); i++) {
+		switch (ka) {
+
+		case state::S:
+			if (v[i] == "+" || v[i] == "-")
+				ka = state::Op;
+			else if (v[i] == "x" || v[i] == "y" || v[i] == "z")
+				ka = state::Var;
+			else if (v[i][0] >= 48 && v[i][0] <= 57)
+				ka = state::Num;
+			else ka = state::Error;
+			continue;
+
+		case state::Op:
+			if (v[i] == "x" || v[i] == "y" || v[i] == "z")
+				ka = state::Var;
+			else if (v[i][0] >= 48 && v[i][0] <= 57)
+				ka = state::Num;
+			else ka = state::Error;
+			continue;
+
+		case state::Num:
+			if (v[i] == "+" || v[i] == "-")
+				ka = state::Op;
+			else if (v[i] == "x" || v[i] == "y" || v[i] == "z")
+				ka = state::Var;
+			else if (v[i] == "*")
+				ka = state::Mul;
+			else ka = state::Error;
+			continue;
+
+		case state::Mul:
+			if (v[i] == "x" || v[i] == "y" || v[i] == "z")
+				ka = state::Var;
+			else ka = state::Error;
+			continue;
+
+		case state::Exp:
+			if (v[i][0] >= 48 && v[i][0] <= 57)
+				ka = state::Num;
+			else ka = state::Error;
+			continue;
+
+		case state::Var:
+			if (v[i] == "+" || v[i] == "-")
+				ka = state::Op;
+			else if (v[i] == "x" || v[i] == "y" || v[i] == "z")
+				ka = state::Var;
+			else if (v[i][0] >= 48 && v[i][0] <= 57)
+				ka = state::Num;
+			else if (v[i] == "*")
+				ka = state::Mul;
+			else if (v[i] == "^")
+				ka = state::Exp;
+			else ka = state::Error;
+			continue;
+
+		default: ka = state::Error;
+		}
+	}
+
+	if (ka != state::Num && ka != state::Var)
+		throw std::exception("Incorrect input");
+
+	bool t = 1;
+	for (int i = 0; i < v.size(); i++) {
+		double c = 1;
+		int xd = 0, yd = 0, zd = 0;
+		char p = ' ';
+
+		if (v[i] == "-") {
+			t = 0;
+			i++;
+		}
+		if (v[i] == "+") {
+			t = 1;
+			i++;
+		}
+
+		while (i < v.size() && v[i] != "+" && v[i] != "-") {
+			if (v[i] == "x") {
+				p = 'x';
+				xd = 1;
+			}
+			else if (v[i] == "y") {
+				p = 'y';
+				yd = 1;
+			}
+			else if (v[i] == "z") {
+				p = 'z';
+				zd = 1;
+			}
+			else if (v[i][0] >= 48 && v[i][0] <= 57) {
+				if (p == ' ') c = stod(v[i]);
+				if (p == 'x') xd = stoi(v[i]);
+				if (p == 'y') yd = stod(v[i]);
+				if (p == 'z') zd = stoi(v[i]);
+			}
+			i++;
+		}
+		i--;
+		if (!t) c *= -1;
+		*this += polynom(monom(c, xd * 100 + yd * 10 + zd));
+	}
 	return *this;
 }

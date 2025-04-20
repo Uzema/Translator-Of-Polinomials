@@ -7,22 +7,22 @@ template<class Tkey, class Tvalue>
 class HashTable {
 	std::vector<std::list<std::pair<Tkey, Tvalue>>> table;
 	size_t sz;
-	int a, b;
+	long long a, b;
 	int SimpleNum = 1000000007;
 	int capacity;
 	std::vector<int> sn = { 157, 262127, 524287, 786433, 1048609, 1310719, 1572869 };
 
 	int hash(std::string s) {
-		int x = 0;
+		long long x = 0;
 		for (int i = 0; i < s.size(); i++)
-			x += (s[i] * (int)pow(2, i)) % SimpleNum;
+			x += (s[i] * (int)pow(31,i)) % SimpleNum;
 		return ((a*x+b)%SimpleNum)%capacity;
 	}
 	
 	int hash(std::string s, int c) {
-		int x = 0;
+		long long x = 0;
 		for (int i = 0; i < s.size(); i++)
-			x += (s[i] * (int)pow(2, i)) % SimpleNum;
+			x += (s[i] * (int)pow(31,i)) % SimpleNum;
 		return ((a*x+b)%SimpleNum)%c;
 	}
 
@@ -52,7 +52,7 @@ public:
 		b = abs(rand()) % SimpleNum;
 		sz = 0;
 		capacity = s;
-		table.resize(capacity);
+		table.resize(s);
 	}
 	
 	class iterator{
@@ -115,11 +115,12 @@ public:
 		while (table[index].empty()) {
 			index++;
 		}
+		if (index >= table.size()) return end();
 		return iterator(index,table[index].begin(),&table);
 	}
 
 	iterator end() {
-		return iterator(capacity-1, table[capacity-1].end(), &table);
+		return iterator(table.size()-1, table[table.size() - 1].end(), &table);
 	}
 
 	void insert(Tkey k, Tvalue v) {

@@ -9,6 +9,7 @@ public:
 	void insert(double c, int exp);
 	monom operator[](int index);
 	void print();
+	polynom& parser(std::string s);
 
 	polynom operator+(polynom& p);
 	polynom operator-(polynom& p);
