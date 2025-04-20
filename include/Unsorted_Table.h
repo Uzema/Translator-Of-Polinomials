@@ -56,11 +56,16 @@ public:
 		pointer operator->() {
 			return ptr;
 		}
+
+		pointer get_ptr() {
+			return ptr;
+		}
 	};
 
 	iterator begin() {
 		return iterator(table.empty() ? nullptr : &table[0]);
 	}
+
 	iterator end() {
 		return iterator(table.empty() ? nullptr : &table[0] + table.size());
 	}
@@ -88,14 +93,17 @@ public:
 		if (it == end()) {
 			throw "Element doesnt exist";
 		}
-		for (int i = 0; i < table.size() - 1; i++) {
-			if (table[i].first == key) {
-				table.erase(table.begin() + i);
-				break;
-			}
-		}
-		return it;
+		return erase(it);
+	}
 
+	iterator erase(iterator it) {
+		if (it == end()) {
+			throw "";
+		}
+		int index = it.get_ptr() - &table[0];
+		table.erase(table.begin() + index);
+		return iterator(index < table.size() ? &table[index] : nullptr);
+		//can use swap and pop back to make erase(it) O(1)
 	}
 
 	std::pair<Tkey, Tvalue> operator[](int ind) {
