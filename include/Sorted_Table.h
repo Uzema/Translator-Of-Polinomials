@@ -55,9 +55,7 @@ public:
 		return iterator(&table[0]);
 	}
 	iterator end() {
-		if (table.empty())
-			return nullptr;
-		return iterator(&table[table.size() - 1])++;
+		return iterator(table.empty() ? nullptr : &table[0] + table.size());
 	}
 	
 	void insert(Tkey key, Tvalue val) {

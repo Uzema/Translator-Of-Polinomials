@@ -1,6 +1,5 @@
 ﻿#pragma once
 #include <vector>
-#include "Polynomial.h"
 
 template <class Tkey, class Tvalue>
 class UnsortedTable {

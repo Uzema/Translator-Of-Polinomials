@@ -1,5 +1,6 @@
 #include <gtest.h>
 #include <random>
+#include "Polynomial.h"
 #include "Unsorted_Table.h"
 
 TEST(UnsortedTable, CanInsert) {

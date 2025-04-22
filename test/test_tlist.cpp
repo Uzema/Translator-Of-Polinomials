@@ -1,5 +1,5 @@
-#include "tlist.h"
 #include <gtest.h>
+#include "tlist.h"
 
 TEST(tlist, can_create_list) {
 	ASSERT_NO_THROW(List<int> l);

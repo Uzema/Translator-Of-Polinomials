@@ -5,6 +5,16 @@ TEST(Polynomial, CreatePolynom) {
 	ASSERT_NO_THROW(polynom p);
 }
 
+TEST(Polynomial, Polynom) {
+	polynom p(monom(1, 100));
+	polynom p1(monom(1, 10));
+	p = p1 + p;
+	EXPECT_EQ(1, p[0].GetCoefficient());
+	EXPECT_EQ(10, p[0].GetDegree());
+	EXPECT_EQ(1, p[1].GetCoefficient());
+	EXPECT_EQ(100, p[1].GetDegree());
+}
+
 TEST(Polynomial, CreatePolynomWithPolynom) {
 	polynom p(monom(1.1, 147));
 	EXPECT_EQ(1.1, p[0].GetCoefficient());
@@ -429,4 +439,114 @@ TEST(Polynomial, CorrectAssigmentMultiplicatePolynomWithEmptyPolynom) {
 	p1 *= p2;
 
 	EXPECT_EQ(0, p1[0].GetCoefficient());
+}
+
+
+TEST(Parser, InputNumber) {
+	polynom p;
+	p.parser("7");
+	EXPECT_EQ(7, p[0].GetCoefficient());
+	EXPECT_EQ(0, p[0].GetDegree());
+}
+
+TEST(Parser, InputDoubleNumber) {
+	polynom p;
+	p.parser("7.1");
+	EXPECT_EQ(7.1, p[0].GetCoefficient());
+	EXPECT_EQ(0, p[0].GetDegree());
+}
+
+TEST(Parser, InputNegstiveNumber) {
+	polynom p;
+	p.parser("-7");
+	EXPECT_EQ(-7, p[0].GetCoefficient());
+	EXPECT_EQ(0, p[0].GetDegree());
+}
+
+TEST(Parser, CalculateNumbers) {
+	polynom p;
+	p.parser("- 2 + 15.5 - 10.5");
+	EXPECT_EQ(3, p[0].GetCoefficient());
+	EXPECT_EQ(0, p[0].GetDegree());
+}
+
+TEST(Parser, InputOnlyX) {
+	polynom p;
+	p.parser("x");
+	EXPECT_EQ(1, p[0].GetCoefficient());
+	EXPECT_EQ(100, p[0].GetDegree());
+}
+
+TEST(Parser, InputOnlyNegativeX) {
+	polynom p;
+	p.parser("-x");
+	EXPECT_EQ(-1, p[0].GetCoefficient());
+	EXPECT_EQ(100, p[0].GetDegree());
+}
+
+TEST(Parser, InputMonomWithoutCoefficient) {
+	polynom p;
+	p.parser("xyz");
+	EXPECT_EQ(1, p[0].GetCoefficient());
+	EXPECT_EQ(111, p[0].GetDegree());
+}
+
+TEST(Parser, InputMonomWithNegativeCoefficient) {
+	polynom p;
+	p.parser("-4xyz");
+	EXPECT_EQ(-4, p[0].GetCoefficient());
+	EXPECT_EQ(111, p[0].GetDegree());
+}
+
+TEST(Parser, InputMonomWithMultiplicationSign) {
+	polynom p;
+	p.parser("-4*x*y*z");
+	EXPECT_EQ(-4, p[0].GetCoefficient());
+	EXPECT_EQ(111, p[0].GetDegree());
+}
+
+TEST(Parser, InputMonomWithDegree) {
+	polynom p;
+	p.parser("-4*x4y2z1");
+	EXPECT_EQ(-4, p[0].GetCoefficient());
+	EXPECT_EQ(421, p[0].GetDegree());
+}
+
+TEST(Parser, InputMonomWithDegreeSign) {
+	polynom p;
+	p.parser("-4*x^4y^2z^1");
+	EXPECT_EQ(-4, p[0].GetCoefficient());
+	EXPECT_EQ(421, p[0].GetDegree());
+}
+
+TEST(Parser, InputMonomWithDegreeAndMultiplicationSign) {
+	polynom p;
+	p.parser("-4*x^4*y^2*z^1");
+	EXPECT_EQ(-4, p[0].GetCoefficient());
+	EXPECT_EQ(421, p[0].GetDegree());
+}
+
+TEST(Parser, InputPolynom) {
+	polynom p;
+	p.parser("x^4*y^2*z^1 + 2xyz");
+	EXPECT_EQ(2, p[0].GetCoefficient());
+	EXPECT_EQ(111, p[0].GetDegree());
+	EXPECT_EQ(1, p[1].GetCoefficient());
+	EXPECT_EQ(421, p[1].GetDegree());
+}
+
+TEST(Parser, InputPolynomWithNegativeMonom) {
+	polynom p;
+	p.parser("x^4*y^2*z^1 - 2xyz");
+	EXPECT_EQ(-2, p[0].GetCoefficient());
+	EXPECT_EQ(111, p[0].GetDegree());
+	EXPECT_EQ(1, p[1].GetCoefficient());
+	EXPECT_EQ(421, p[1].GetDegree());
+}
+
+TEST(Parser, InputPolynomWithCombiningLikeTerms) {
+	polynom p;
+	p.parser("- 2xyz + xyz");
+	EXPECT_EQ(-1, p[0].GetCoefficient());
+	EXPECT_EQ(111, p[0].GetDegree());
 }
