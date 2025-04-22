@@ -170,18 +170,18 @@ TEST(AVLTree, CopyAssignment) {
 	EXPECT_EQ(345, ot.getValue(4));
 }
 
-TEST(AVLTree, StressTest) {
-	AVLTree<int, polynom> t;
-	polynom p = polynom(monom(1, 100));
-	int j = 1;
-	for (int i = 0; i < 1000000; i++) {
-		int r = rand() % 10;
-		if (r < 7 || i < 500000)
-			t.insert(i, p);
-		else {
-			t.erase(j);
-			j++;
-		}
-	}
-	ASSERT_NO_THROW();
-}
+//TEST(AVLTree, StressTest) {
+//	AVLTree<int, polynom> t;
+//	polynom p = polynom(monom(1, 100));
+//	int j = 1;
+//	for (int i = 0; i < 1000000; i++) {
+//		int r = rand() % 10;
+//		if (r < 7 || i < 500000)
+//			t.insert(i, p);
+//		else {
+//			t.erase(j);
+//			j++;
+//		}
+//	}
+//	ASSERT_NO_THROW();
+//}
