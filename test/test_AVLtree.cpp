@@ -1,6 +1,7 @@
 #pragma once
 #include <gtest.h>
 #include "AVLTree.h"
+#include "Polynomial.h"
 
 class TreeTesting : public::testing::Test {
 protected:

@@ -1,7 +1,6 @@
 ﻿#pragma once
 #include <vector>
 #include <algorithm>
-#include "Polynomial.h"
 
 template <class Tkey, class Tvalue>
 class AVLTree {

@@ -8,9 +8,11 @@
 #include "stack.h"
 #include "Polynomial.h"
 #include "Sorted_Table.h"
-#include "UnSorted_Table.h"
+#include "Unsorted_Table.h"
 #include "Hash_Table1.h"
+#include "Hash_Table2.h"
 #include "BRtree.h"
+#include "AVLTree.h"
 
 class term {
 	term *obj;

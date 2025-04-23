@@ -8,7 +8,9 @@ class UserInterface {
 	SortedTable<std::string, polynom> st;
 	UnsortedTable<std::string, polynom> ut;
 	BRtree<std::string, polynom> br;
+	AVLTree<std::string, polynom> av;
 	HashTable<std::string, polynom> ht;
+	HashO<std::string, polynom> ho;
 	Status status;
 
 public:
@@ -44,9 +46,12 @@ public:
 		SortedTable<std::string, polynom> st;
 		UnsortedTable<std::string, polynom> ut;
 		BRtree<std::string, polynom> br;
+		AVLTree<std::string, polynom> av;
 		HashTable<std::string, polynom> ht;
+		HashO<std::string, polynom> ho;
 		status = ST;
 	}
+
 	polynom get(std::string key) {
 		if (status == ST) {
 			if (st.find(key) != st.end())
@@ -65,8 +70,8 @@ public:
 			else std::cout << "Element is not exist\n";
 		}
 	}
-private:
 
+private:
 
 	void print(std::string inp) {
 

@@ -2,7 +2,6 @@
 #include <vector>
 //#include <algorithm>
 #include <cmath>
-#include "Polynomial.h"
 
 template <class Tkey, class Tvalue>
 class HashO {
@@ -73,11 +72,16 @@ public:
 	}
 
 	void insert(Tkey key, Tvalue value) {
+		if (size == capacity) {
+			//repack
+		}
+
 		tuple t(key, value);
 		int index = Hash(key);
 
 		while (!table[index].getEmpty()) {
 			index = (index + 1) % capacity;
+			continue;
 		}
 		if (table[index].getEmpty()) {
 			table[index] = t;
@@ -88,25 +92,55 @@ public:
 	
 	tuple find(Tkey key) {
 		int index = Hash(key);
-		while (!table[index].getEmpty()) {
-			if (!table[index].getEmpty()) {
+		int start_index = index;
+		do {
+			if (table[index].getEmpty() == false) {
 				if (table[index].getKey() == key) {
 					return table[index];
 				}
 				else {
 					index = (index + 1) % capacity;
+					continue;
 				}
 			}
 			else {
 				if (table[index].getFlag() == true) {
 					index = (index + 1) % capacity;
+					continue;
 				}
 				else {
-					throw "Element not found";
+					throw "didnt find";
 				}
 			}
-		}
+		} while (true);
 	}
+
+	void erase(Tkey key) {
+		int index = Hash(key);
+		do {
+			if (tabble[index].getEmpty() == false) {
+				if (table[index].getKey() == key) {
+					tuple.flag = true;
+					tuple.empty = true;
+					return;
+				}
+				else {
+					index = (index + 1) % capacity;
+					continue;
+				}
+			}
+			else {
+				if (table[index].getFlag() == true) {
+					index = (index + 1) % capacity;
+					continue;
+				}
+				else {
+					throw "didnt find";
+				}
+			}
+		} while (true);
+	}
+
 
 	Tvalue operator[](Tkey key) {
 		return find(key).getValue();
