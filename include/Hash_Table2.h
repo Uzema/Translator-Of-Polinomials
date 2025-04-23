@@ -118,10 +118,10 @@ public:
 	void erase(Tkey key) {
 		int index = Hash(key);
 		do {
-			if (tabble[index].getEmpty() == false) {
+			if (table[index].getEmpty() == false) {
 				if (table[index].getKey() == key) {
-					tuple.flag = true;
-					tuple.empty = true;
+					/*tuple.flag = true;
+					tuple.empty = true;*/
 					return;
 				}
 				else {

@@ -3,7 +3,7 @@
 #include "translator.h"
 
 class UserInterface {
-	enum Status { ST, UT, BR, AV, HC, HO };
+	enum Status { ST, UT, BR, AV, HT, HO };
 
 	SortedTable<std::string, polynom> st;
 	UnsortedTable<std::string, polynom> ut;
@@ -18,8 +18,11 @@ public:
 	void process(std::string inp) {
 		inp.erase(std::remove_if(inp.begin(), inp.end(), ::isspace), inp.end());
 
-		if (inp.size() >= 4 && inp.substr(0, 4) == "show") {
+		if (inp.size() > 4 && inp.substr(0, 4) == "show") {
 			print(inp.substr(4, inp.size() - 1));
+		}
+		else if (inp == "show") {
+			print();
 		}
 		else if (inp.size() >= 6 && inp.substr(0, 6) == "switch") {
 			sw(inp.substr(6, inp.size() - 1));
@@ -56,42 +59,65 @@ public:
 		if (status == ST) {
 			if (st.find(key) != st.end())
 				st.find(key)->second.print();
-			else std::cout << "Element is not exist\n";
+			else std::cout << "Element doesnt exist\n";
+		}
+		if (status == UT) {
+			if (ut.find(key) != ut.end())
+				ut.find(key)->second.print();
+			else std::cout << "Element doesnt exist\n";
 		}
 		if (status == BR) {
 			if (br.find(key) != br.end())
 				br.find(key)->value.print();
-			else std::cout << "Element is not exist\n";
+			else std::cout << "Element doesnt exist\n";
 		}
-		if (status == HO) ht.find(key);
-		if (status == UT) {
-			if (ut.find(key) != ut.end())
-				ut.find(key)->second.print();
-			else std::cout << "Element is not exist\n";
+		if (status == AV) {
+			if (av.find(key) != nullptr) {
+				av.find(key)->value.print();
+			}
 		}
+		if (status == HT) ht.find(key);
+		if (status == HO) ho.find(key).getValue().print();
+		
 	}
 
 private:
 
 	void print(std::string inp) {
+		//if (status == ST) //st.print(inp);
+		//if (status == UT) ut.print(inp);
+		//if (status == BR) br.print(inp);
+		//if (status == AV) av.print(inp);
+		//if (status == HT) ht.print(inp);
+		//if (status == HO) ho.print(inp);
+	}
 
+	void print() {
+		//if (status == ST) st.print();
+		if (status == UT) ut.print();
+		//if (status == BR) br.print();
+		if (status == AV) av.print();
+		//if (status == HT) ht.print();
+		//if (status == HO) ho.print();
 	}
 
 	void sw(std::string inp) {
-		if (inp == "SortedTable") status = ST;
-		else if (inp == "UnsortedTable") status = UT;
-		else if (inp == "BRtree") status = BR;
-		else if (inp == "AVLtree") status = AV;
-		else if (inp == "ChainedHashTable") status = HC;
-		else if (inp == "ProbingHashTable") status = HO;
+		if (inp == "SortedTable" || inp == "st") status = ST;
+		else if (inp == "UnsortedTable" || inp == "ut") status = UT;
+		else if (inp == "BRtree" || inp == "br") status = BR;
+		else if (inp == "AVLtree" || inp == "av") status = AV;
+		else if (inp == "ChainedHashTable" || inp == "ht" || inp == "h1") status = HT;
+		else if (inp == "ProbingHashTable" || inp == "ho" || inp == "h2") status = HO;
 		else std::cout << "Incorrect switch\n";
 	}
 
 	void erase(std::string inp) {
 		if (status == ST) st.erase(inp);
-		if (status == BR) br.erase(inp);
-		if (status == HO) ht.erase(inp);
 		if (status == UT) ut.erase(inp);
+		if (status == BR) br.erase(inp);
+		if (status == AV) av.erase(inp);
+		if (status == HT) ht.erase(inp);
+		if (status == HO) ho.erase(inp);
 	}
 
 	void insert(std::string inp, int eq) {
@@ -111,9 +137,11 @@ private:
 		
 		vars[name] = p;
 		if (status == ST) st.insert(name, p);
-		if (status == BR) br.insert(name, p);
-		if (status == HO) ht.insert(name, p);
 		if (status == UT) ut.insert(name, p);
+		if (status == BR) br.insert(name, p);
+		if (status == AV) av.insert(name, p);
+		if (status == HT) ht.insert(name, p);
+		if (status == HO) ho.insert(name, p);
 	}
 
 	void calc(std::string inp) {

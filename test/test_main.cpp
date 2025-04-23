@@ -39,7 +39,16 @@ int main(int argc, char** argv) {
             return RUN_ALL_TESTS();
         }
         else if (s1 == "help") {
-            std::cout << "This is a help sheet!\n\033[36mrun_test\033[0m - will run gtests" << std::endl;
+            std::cout << "This is a help sheet!\n\
+You can chose different data structures by using swtich and its full name \nor the short notation in the brackets (case sensitive):\n\
+1) SortedTable (st) \n2) UnsortedTable (ut) \n3) BRtree (br) \n4) AVLtree (av) \n5) ChainedHashTable (ht/h1) \n6) ProbingHashTable (ho/h2)\n\
+You can insert polynoms by using this syntax:\n\
+<key> = <your_polynom> (ex. a=16x^2yz)\n\
+<key> = <arithmetic actions with already existing polynoms> (ex. a=b+c)\n\
+\033[36mrun_test\033[0m - will run gtests\n\
+\033[36mswitch\033[0m <name> - will switch data structure(st, ut, av, br, ht, ho)\n\
+\033[36mshow\033[0m - will print out all the stored polynoms along with their keys\n\
+\033[36mdel\033[0m <key> - will delete polynom with specified key\n" << std::endl;
         }
 
     }

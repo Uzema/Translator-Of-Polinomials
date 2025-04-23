@@ -114,4 +114,11 @@ public:
 		return table.size();
 	}
 
+	void print() {
+		for (auto it = begin(); it != end(); ++it) {
+			std::cout << it->first << "=";
+			it->second.print();
+		}
+	}
+
 };
