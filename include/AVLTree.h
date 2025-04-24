@@ -105,7 +105,7 @@ private:
 	void print(Node* curr) {
 		if (!curr) return;
 		print(curr->left);
-		std::cout << curr->key << "=";
+		std::cout << curr->key << " = ";
 		curr->value.print();
 		//std::cout << std::endl;
 		print(curr->right);
@@ -233,6 +233,7 @@ public:
 
 	void print() {
 		print(root);
+		std::cout << size() << " rows\n";
 	}
 
 	Node* find(Tkey key) {

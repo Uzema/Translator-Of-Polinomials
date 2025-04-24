@@ -24,10 +24,13 @@ public:
 		else if (inp == "show") {
 			print();
 		}
-		else if (inp.size() >= 6 && inp.substr(0, 6) == "switch") {
+		else if (inp == "status") {
+			stat();
+		}
+		else if (inp.size() > 6 && inp.substr(0, 6) == "switch") {
 			sw(inp.substr(6, inp.size() - 1));
 		}
-		else if (inp.size() >= 3 && inp.substr(0, 3) == "del") {
+		else if (inp.size() > 3 && inp.substr(0, 3) == "del") {
 			erase(inp.substr(3, inp.size() - 1));
 		}
 		else {
@@ -55,43 +58,19 @@ public:
 		status = ST;
 	}
 
-	polynom get(std::string key) {
-		if (status == ST) {
-			if (st.find(key) != st.end())
-				st.find(key)->second.print();
-			else std::cout << "Element doesnt exist\n";
-		}
-		if (status == UT) {
-			if (ut.find(key) != ut.end())
-				ut.find(key)->second.print();
-			else std::cout << "Element doesnt exist\n";
-		}
-		if (status == BR) {
-			if (br.find(key) != br.end())
-				br.find(key)->value.print();
-			else std::cout << "Element doesnt exist\n";
-		}
-		if (status == AV) {
-			if (av.find(key) != nullptr) {
-				av.find(key)->value.print();
-			}
-		}
-		if (status == HT) ht.find(key);
-		if (status == HO) ho.find(key).getValue().print();
-		
-	}
-
 private:
 
-	void print(std::string inp) {
-		//if (status == ST) //st.print(inp);
-		//if (status == UT) ut.print(inp);
-		//if (status == BR) br.print(inp);
-		//if (status == AV) av.print(inp);
-		//if (status == HT) ht.print(inp);
-		//if (status == HO) ho.print(inp);
+	void print(std::string inp = "-1") {
+		int s = std::stoi(inp);
+		if (status == ST) st.print(s);
+		if (status == UT) ut.print();
+		if (status == BR) br.print();
+		if (status == AV) av.print();
+		if (status == HT) ht.print();
+		//if (status == HO) ho.print();
 	}
 
+<<<<<<< HEAD
 	void print() {
 		//if (status == ST) st.print();
 		if (status == UT) ut.print();
@@ -99,6 +78,15 @@ private:
 		if (status == AV) av.print();
 		//if (status == HT) ht.print();
 		if (status == HO) ho.print();
+=======
+	void stat() {
+		if (status == ST) std::cout << "Sorted Table\n";
+		if (status == UT) std::cout << "Unsorted Table\n";
+		if (status == BR) std::cout << "Red Black tree\n";
+		if (status == AV) std::cout << "AVL tree\n";
+		if (status == HT) std::cout << "Chained Hash Table\n";
+		if (status == HO) std::cout << "Probing Hash Table\n";
+>>>>>>> 25588103ea850ebbac5af26498c9057284a2e96a
 	}
 
 	void sw(std::string inp) {

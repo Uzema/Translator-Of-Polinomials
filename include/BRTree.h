@@ -369,4 +369,12 @@ public:
 	bool empty() {
 		return sz == 0;
 	}
+
+	void print() {
+		for (auto it = begin(); it != end(); ++it) {
+			std::cout << it->key << " = ";
+			it->value.print();
+		}
+		std::cout << size() << " rows\n";
+	}
 };
