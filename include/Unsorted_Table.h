@@ -116,9 +116,10 @@ public:
 
 	void print() {
 		for (auto it = begin(); it != end(); ++it) {
-			std::cout << it->first << "=";
+			std::cout << it->first << " = ";
 			it->second.print();
 		}
+		std::cout << size() << " rows\n";
 	}
 
 };

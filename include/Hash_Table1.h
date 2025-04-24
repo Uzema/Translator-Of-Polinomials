@@ -160,4 +160,12 @@ public:
 	size_t size() {
 		return sz;
 	}
+
+	void print() {
+		for (auto it = begin(); it != end(); ++it) {
+			std::cout << it->first << " = ";
+			it->second.print();
+		}
+		std::cout << sz << " rows\n";
+	}
 };

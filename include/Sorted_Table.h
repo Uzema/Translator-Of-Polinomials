@@ -15,7 +15,7 @@ public:
 
 		iterator& operator++() {
 			ptr++;
-			return *ptr;
+			return *this;
 		}
 
 		iterator& operator++(int) {
@@ -109,5 +109,23 @@ public:
 
 	int size() {
 		return table.size();
+	}
+
+	void print(int n = -1) {
+		int x = n;
+		if (n == -1) {
+			x = size();
+			n = x;
+		}
+		if (n > size() || n < 0) {
+			std::cout << "Out of range\n";
+			return;
+		}
+		for (iterator it = begin(); it != end(); ++it, n--) {
+			if (n <= 0) break;
+			std::cout << it->first << " = ";
+			it->second.print();
+		}
+		std::cout << x <<" rows\n";
 	}
 };

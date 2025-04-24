@@ -31,6 +31,7 @@ int main(int argc, char** argv) {
     std::cout << "Write \033[1;32mhelp\033[0m for program usage" << std::endl;
     while (true) {
         std::string s1;
+        std::cout << ">>> ";
         std::getline(std::cin, s1);
         ui.process(s1);
 
@@ -47,6 +48,7 @@ You can insert polynoms by using this syntax:\n\
 <key> = <arithmetic actions with already existing polynoms> (ex. a=b+c)\n\
 \033[36mrun_test\033[0m - will run gtests\n\
 \033[36mswitch\033[0m <name> - will switch data structure(st, ut, av, br, ht, ho)\n\
+\033[36mstatus\033[0m - will print current data structure status\n\
 \033[36mshow\033[0m - will print out all the stored polynoms along with their keys\n\
 \033[36mdel\033[0m <key> - will delete polynom with specified key\n" << std::endl;
         }
