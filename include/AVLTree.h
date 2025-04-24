@@ -1,7 +1,6 @@
 ﻿#pragma once
 #include <vector>
 #include <algorithm>
-#include "Polynomial.h"
 
 template <class Tkey, class Tvalue>
 class AVLTree {
@@ -106,7 +105,9 @@ private:
 	void print(Node* curr) {
 		if (!curr) return;
 		print(curr->left);
-		std::cout << curr->key << "_" << curr->value << " ";
+		std::cout << curr->key << "=";
+		curr->value.print();
+		//std::cout << std::endl;
 		print(curr->right);
 	}
 
