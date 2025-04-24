@@ -67,7 +67,7 @@ private:
 		if (status == BR) br.print();
 		if (status == AV) av.print();
 		if (status == HT) ht.print();
-		//if (status == HO) ho.print();
+		if (status == HO) ho.print();
 	}
 
 	void stat() {

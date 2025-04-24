@@ -48,7 +48,7 @@ class HashO {
 	};
 
 	std::vector<tuple> table;
-	int size;
+	int size = 0;
 	int capacity;
 	int a, b;
 	int simpleNum = 1'000'000'007;
@@ -69,6 +69,16 @@ public:
 			x += (s[i] * (int)pow(31, i)) % simpleNum;
 		}
 		return ((a * x + b) % simpleNum) % capacity;
+	}
+
+	void print() {
+		for (int i = 0; i < capacity; i++) {
+			if (table[i].getEmpty() == false) {
+				std::cout << table[i].getKey() << " = ";
+				table[i].getValue().print();
+			}
+		}
+		std::cout << size << " rows\n";
 	}
 
 	void insert(Tkey key, Tvalue value) {
@@ -120,8 +130,8 @@ public:
 		do {
 			if (table[index].getEmpty() == false) {
 				if (table[index].getKey() == key) {
-					/*tuple.flag = true;
-					tuple.empty = true;*/
+					table[index].flag = true;
+					table[index].empty = true;
 					return;
 				}
 				else {

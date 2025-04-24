@@ -45,7 +45,7 @@ You can chose different data structures by using swtich and its full name \nor t
 1) SortedTable (st) \n2) UnsortedTable (ut) \n3) BRtree (br) \n4) AVLtree (av) \n5) ChainedHashTable (ht/h1) \n6) ProbingHashTable (ho/h2)\n\
 You can insert polynoms by using this syntax:\n\
 <key> = <your_polynom> (ex. a=16x^2yz)\n\
-<key> = <arithmetic actions with already existing polynoms> (ex. a=b+c)\n\
+<key> = <arithmetic expression with already existing polynoms> (ex. a=b+c)\n\
 \033[36mrun_test\033[0m - will run gtests\n\
 \033[36mswitch\033[0m <name> - will switch data structure(st, ut, av, br, ht, ho)\n\
 \033[36mstatus\033[0m - will print current data structure status\n\
