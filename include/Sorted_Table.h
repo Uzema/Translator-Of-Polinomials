@@ -25,7 +25,7 @@ public:
 		}
 
 		iterator& operator--() {
-			ptr--
+			ptr--;
 			return *ptr;
 		}
 

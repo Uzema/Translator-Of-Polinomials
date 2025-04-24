@@ -11,7 +11,7 @@
 #include "Unsorted_Table.h"
 #include "Hash_Table1.h"
 #include "Hash_Table2.h"
-#include "BRtree.h"
+#include "BRTree.h"
 #include "AVLTree.h"
 
 class term {

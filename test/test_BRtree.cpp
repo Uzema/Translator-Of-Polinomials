@@ -1,6 +1,6 @@
-#include<gtest.h>
-#include"BRTree.h"
-#include"polynomial.h"
+#include <gtest.h>
+#include "BRTree.h"
+#include "Polynomial.h"
 
 TEST(BRtree, createTree) {
 	BRtree<std::string, polynom> t;

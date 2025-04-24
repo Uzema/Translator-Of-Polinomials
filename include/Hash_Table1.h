@@ -135,7 +135,7 @@ public:
 
 	iterator find(Tkey k) {
 		int i = hash(k);
-		std::list<std::pair<Tkey,Tvalue>>::iterator it = table[i].begin();
+		typename std::list<std::pair<Tkey,Tvalue>>::iterator it = table[i].begin();
 		while (it != table[i].end()) {
 			if (it->first == k)
 				return iterator(i, it, &table);
@@ -146,7 +146,7 @@ public:
 
 	void erase(Tkey k) {
 		int index = hash(k);
-		std::list<std::pair<Tkey, Tvalue>>::iterator it = table[index].begin();
+		typename std::list<std::pair<Tkey, Tvalue>>::iterator it = table[index].begin();
 		for (; it != table[index].end(); it++) {
 			if (it->first == k) {
 				table[index].erase(it);

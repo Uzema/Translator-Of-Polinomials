@@ -55,6 +55,58 @@ public:
 		return iterator(head);
 	}
 
+	/*class const_iterator {
+	protected:
+    	const node* curr;  // Pointer-to-const
+	public:
+    	explicit const_iterator(const node* node) : curr(node) {}
+    
+		// Prefix ++
+		const_iterator& operator++() {
+			curr = curr->next;
+			return *this;
+		}
+		
+		// Postfix ++
+		const_iterator operator++(int) {
+			const_iterator copy = *this;
+			curr = curr->next;
+			return copy;
+		}
+		
+		// Dereference (returns const reference)
+		const T& operator*() const {
+			return curr->value;
+		}
+		
+		// Arrow operator (returns pointer-to-const)
+		const T* operator->() const {
+			return &(curr->value);
+		}
+		
+		// Get underlying node (const version)
+		const node* get_node() const {
+			return curr;
+		}
+		
+		// Comparison operators
+		friend bool operator!=(const const_iterator& it1, const const_iterator& it2) {
+			return it1.curr != it2.curr;
+		}
+		
+		friend bool operator==(const const_iterator& it1, const const_iterator& it2) {
+			return it1.curr == it2.curr;
+		}
+	};
+
+	const_iterator begin() const {
+    	return const_iterator(head->next);
+	}
+
+	const_iterator end() const {
+    	return const_iterator(head);
+	}*/
+
 	List();
 	List(int n, T deflt = T());
 	~List();
@@ -74,7 +126,7 @@ public:
 	}
 	
 	node* erase(node* n) {
-		if (n->next == head) throw std::exception("erase a non existing element");
+		if (n->next == head) throw std::runtime_error("erase a non existing element");
 		node* ne = n->next;
 		n->next = ne->next;
 		delete ne;
@@ -103,8 +155,8 @@ inline List<T>::List() {
 }
 
 template <class T>
-inline List<T>::List(int n, T deflt = T()) {
-	if (n < 0) throw std::exception("List size should be non negative");
+inline List<T>::List(int n, T deflt) {
+	if (n < 0) throw std::runtime_error("List size should be non negative");
 	if (n == 0) {
 		head = new node;
 		head->next = head;
@@ -209,7 +261,7 @@ inline List<T> List<T>::operator=(const List<T>& l) {
 
 template <class T>
 inline T& List<T>::operator[](int ind) {
-	if (ind < 0) throw std::exception("out_of_range");
+	if (ind < 0) throw std::runtime_error("out_of_range");
 
 	node* cur = head->next;
 	for (int i = 0; cur != head; i++) {
@@ -218,7 +270,7 @@ inline T& List<T>::operator[](int ind) {
 
 		cur = cur->next;
 	}
-	throw std::exception("out_of_range");
+	throw std::runtime_error("out_of_range");
 }
 
 #endif
