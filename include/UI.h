@@ -67,18 +67,9 @@ private:
 		if (status == BR) br.print();
 		if (status == AV) av.print();
 		if (status == HT) ht.print();
-		//if (status == HO) ho.print();
+		if (status == HO) ho.print();
 	}
 
-<<<<<<< HEAD
-	void print() {
-		//if (status == ST) st.print();
-		if (status == UT) ut.print();
-		//if (status == BR) br.print();
-		if (status == AV) av.print();
-		//if (status == HT) ht.print();
-		if (status == HO) ho.print();
-=======
 	void stat() {
 		if (status == ST) std::cout << "Sorted Table\n";
 		if (status == UT) std::cout << "Unsorted Table\n";
@@ -86,7 +77,6 @@ private:
 		if (status == AV) std::cout << "AVL tree\n";
 		if (status == HT) std::cout << "Chained Hash Table\n";
 		if (status == HO) std::cout << "Probing Hash Table\n";
->>>>>>> 25588103ea850ebbac5af26498c9057284a2e96a
 	}
 
 	void sw(std::string inp) {
