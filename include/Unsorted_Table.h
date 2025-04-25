@@ -75,7 +75,7 @@ public:
 			table.push_back(std::make_pair(key, val));
 		}
 		else {
-			throw "Element with this key exists already";
+			throw std::runtime_error("Element with this key exists already");
 		}
 	}
 
@@ -91,14 +91,14 @@ public:
 	iterator erase(Tkey key) {
 		auto it = find(key);
 		if (it == end()) {
-			throw "Element doesnt exist";
+			throw std::runtime_error("Element doesnt exist");
 		}
 		return erase(it);
 	}
 
 	iterator erase(iterator it) {
 		if (it == end()) {
-			throw "";
+			throw std::runtime_error("");
 		}
 		int index = it.get_ptr() - &table[0];
 		table.erase(table.begin() + index);

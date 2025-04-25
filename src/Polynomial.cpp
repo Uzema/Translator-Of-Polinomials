@@ -248,7 +248,7 @@ polynom& polynom::operator*=(double c) {
 }
 
 polynom polynom::operator/(double c) {
-	if (abs(c) < 0.0000000001) throw "division by zero";
+	if (abs(c) < 0.0000000001) throw std::runtime_error("division by zero");
 	polynom res = *this;
 	for (List<monom>::iterator i = res.l.begin(); i != res.l.end(); i++)
 		*i /= c;
@@ -256,7 +256,7 @@ polynom polynom::operator/(double c) {
 }
 
 polynom& polynom::operator/=(double c) {
-	if (abs(c) < 0.0000000001) throw "division by zero";
+	if (abs(c) < 0.0000000001) throw std::runtime_error("division by zero");
 	for (List<monom>::iterator i = this->l.begin(); i != this->l.end(); i++)
 		*i /= c;
 	return *this;

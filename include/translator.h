@@ -165,7 +165,7 @@ static std::vector<term*> LexicalAnalyser(std::string str) {
 				res.push_back(new var(polynom(monom(stod(numstr),0))));
 			}
 
-			else throw "Error";
+			else throw std::runtime_error("Error");
 		}
 
 		if (str[i] >= 'a' && str[i] <= 'z' || str[i] >= 'A' && str[i] <= 'Z') {

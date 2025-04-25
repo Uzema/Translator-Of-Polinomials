@@ -55,58 +55,6 @@ public:
 		return iterator(head);
 	}
 
-	/*class const_iterator {
-	protected:
-    	const node* curr;  // Pointer-to-const
-	public:
-    	explicit const_iterator(const node* node) : curr(node) {}
-    
-		// Prefix ++
-		const_iterator& operator++() {
-			curr = curr->next;
-			return *this;
-		}
-		
-		// Postfix ++
-		const_iterator operator++(int) {
-			const_iterator copy = *this;
-			curr = curr->next;
-			return copy;
-		}
-		
-		// Dereference (returns const reference)
-		const T& operator*() const {
-			return curr->value;
-		}
-		
-		// Arrow operator (returns pointer-to-const)
-		const T* operator->() const {
-			return &(curr->value);
-		}
-		
-		// Get underlying node (const version)
-		const node* get_node() const {
-			return curr;
-		}
-		
-		// Comparison operators
-		friend bool operator!=(const const_iterator& it1, const const_iterator& it2) {
-			return it1.curr != it2.curr;
-		}
-		
-		friend bool operator==(const const_iterator& it1, const const_iterator& it2) {
-			return it1.curr == it2.curr;
-		}
-	};
-
-	const_iterator begin() const {
-    	return const_iterator(head->next);
-	}
-
-	const_iterator end() const {
-    	return const_iterator(head);
-	}*/
-
 	List();
 	List(int n, T deflt = T());
 	~List();

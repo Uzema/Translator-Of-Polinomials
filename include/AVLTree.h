@@ -123,7 +123,7 @@ private:
 	Node* insert(Tkey key, Tvalue value, Node* curr) {
 		if (!curr) return new Node(key, value);
 		if (key == curr->key) {
-			throw "keys must be unique";
+			throw std::runtime_error("keys must be unique");
 		}
 		if (key < curr->key) {
 			curr->left = insert(key, value, curr->left);
@@ -137,7 +137,7 @@ private:
 	}
 
 	Node* erase(Tkey key, Node* curr) {
-		if (!curr) throw "No node found with that key";
+		if (!curr) throw std::runtime_error("No node found with that key");
 		else if (key < curr->key) {
 			curr->left = erase(key, curr->left);
 		}
@@ -189,15 +189,15 @@ private:
 		if (!curr) return nullptr;
 
 		if (!(getBalance(curr) == -1 || getBalance(curr) == 0 || getBalance(curr) == 1)) {
-			throw "AVLTree is not properly balanced";
+			throw std::runtime_error("AVLTree is not properly balanced");
 		}
 
 		if (curr->left) {
-			if (curr->key <= curr->left->key) throw "Is not a search tree";
+			if (curr->key <= curr->left->key) throw std::runtime_error("Is not a search tree");
 		}
 
 		if (curr->right) {
-			if (curr->key >= curr->right->key) throw "Is not a search tree";
+			if (curr->key >= curr->right->key) throw std::runtime_error("Is not a search tree");
 		}
 
 		curr->left = testing(curr->left);

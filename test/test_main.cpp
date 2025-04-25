@@ -33,7 +33,15 @@ int main(int argc, char** argv) {
         std::string s1;
         std::cout << ">>> ";
         std::getline(std::cin, s1);
-        ui.process(s1);
+        try {
+            ui.process(s1);
+        }
+        catch (std::exception const& e) {
+            std::cout << "Caught an exception: " << e.what() << std::endl;
+        }
+        catch (...) {
+            std::cout << "Unknown exception" << std::endl;
+        }
 
         if (s1 == "run_test") {
             ::testing::InitGoogleTest(&argc, argv);

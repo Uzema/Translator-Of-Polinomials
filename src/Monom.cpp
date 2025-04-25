@@ -1,6 +1,5 @@
 ﻿#include <cmath>
 #include <iostream>
-#include <exception>
 #include "Monom.h"
 
 monom::monom() {

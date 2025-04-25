@@ -19,13 +19,13 @@ void inline MyStack<T, Tcont>::push(const T& val) {
 
 template <class T, template<class, class...> class Tcont>
 void inline MyStack<T, Tcont>::pop() {
-	if (data.empty()) throw "Delete a non existent element";
+	if (data.empty()) throw std::runtime_error("Delete a non existent element");
 	data.pop_back();
 }
 
 template <class T, template<class, class...> class Tcont>
 inline T& MyStack<T, Tcont>::top() {
-	if (data.empty()) throw "Stack is empty";
+	if (data.empty()) throw std::runtime_error("Stack is empty");
 	return data.back();
 }
 

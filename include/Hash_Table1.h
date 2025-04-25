@@ -126,7 +126,7 @@ public:
 	void insert(Tkey k, Tvalue v) {
 		int index = hash(k);
 		if (find(k) != end())
-			throw "This value already exists";
+			throw std::runtime_error("This value already exists");
 		table[index].push_front(std::make_pair(k, v));
 		sz++;
 		if ((double)sz / (double)capacity > 0.6f)
@@ -154,7 +154,7 @@ public:
 				return;
 			}
 		}
-		throw "The value does not exist";
+		throw std::runtime_error("The value does not exist");
 	}
 
 	size_t size() {
