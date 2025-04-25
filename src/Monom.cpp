@@ -1,6 +1,6 @@
-﻿#include<cmath>
-#include<iostream>
-#include"monom.h"
+﻿#include <cmath>
+#include <iostream>
+#include "Monom.h"
 
 monom::monom() {
 	coef = 0.0;
@@ -9,7 +9,7 @@ monom::monom() {
 
 monom::monom(double c, int x, int y, int z) {
 	if (x < 0 || y < 0 || z < 0 || x > 9 || y > 9 || z > 9)
-		throw std::exception("incorrect degree input");
+		throw std::runtime_error("incorrect degree input");
 	coef = c;
 	exp = x * 100 + y * 10 + z;
 }
@@ -38,12 +38,12 @@ int monom::GetDegreeZ() {
 }
 
 monom monom::operator+(const monom& m) {
-	if (m.exp != exp) throw std::exception("Degree are different");
+	if (m.exp != exp) throw std::runtime_error("Degree are different");
 	return monom(m.coef + coef, exp);
 }
 
 monom monom::operator-(const monom& m) {
-	if (m.exp != exp) throw std::exception("Degree are different");
+	if (m.exp != exp) throw std::runtime_error("Degree are different");
 	return monom(coef - m.coef, exp);
 }
 
@@ -73,18 +73,18 @@ monom monom::operator*(double c) {
 }
 
 monom monom::operator/(double c) {
-	if (abs(c) < 0.000000001) throw std::exception("divide by zero");
+	if (abs(c) < 0.000000001) throw std::runtime_error("divide by zero");
 	return monom(coef / c, exp);
 }
 
 monom& monom::operator+=(const monom& m) {
-	if (exp != m.exp) throw std::exception("Degree are different");
+	if (exp != m.exp) throw std::runtime_error("Degree are different");
 	coef += m.coef;
 	return *this;
 }
 
 monom& monom::operator-=(const monom& m) {
-	if (exp != m.exp) throw std::exception("Degree are different");
+	if (exp != m.exp) throw std::runtime_error("Degree are different");
 	coef -= m.coef;
 	return *this;
 }
@@ -93,7 +93,7 @@ monom& monom::operator*=(monom& m) {
 	if (GetDegreeX() + m.GetDegreeX() > 9 ||
 		GetDegreeY() + m.GetDegreeY() > 9 ||
 		GetDegreeZ() + m.GetDegreeZ() > 9)
-		throw std::exception("incorrect degree as a result");
+		throw std::runtime_error("incorrect degree as a result");
 	coef *= m.coef;
 
 	exp = (GetDegreeX() + m.GetDegreeX()) * 100 +
@@ -107,7 +107,7 @@ monom& monom::operator/=(monom& m) {
 		GetDegreeY() - m.GetDegreeY() < 0 ||
 		GetDegreeZ() - m.GetDegreeZ() < 0 ||
 		abs(m.coef) < 0.000000001)
-		throw std::exception("incorrect degree as a result");
+		throw std::runtime_error("incorrect degree as a result");
 
 	coef /= m.coef;
 	exp = (GetDegreeX() - m.GetDegreeX()) * 100 +
@@ -122,7 +122,7 @@ monom& monom::operator*=(double c) {
 }
 
 monom& monom::operator/=(double c) {
-	if (abs(c) < 0.00000001) throw std::exception("division by zero");
+	if (abs(c) < 0.00000001) throw std::runtime_error("division by zero");
 	coef /= c;
 	return *this;
 }

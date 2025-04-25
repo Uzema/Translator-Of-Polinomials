@@ -302,7 +302,7 @@ private:
 				cur = cur->right;
 		}
 		if (!cur)
-			throw "Not existing element";
+			throw std::runtime_error("Not existing element");
 		node* d = cur;
 		if(cur->right && !cur->right->fict)
 			cur = cur->right;
@@ -352,7 +352,7 @@ public:
 
 	void insert(Tkey k, Tvalue val) {
 		if (find(k) != iterator(nullptr))
-			throw "This value is alredy exist";
+			throw std::runtime_error("This value is alredy exist");
 		node* x = prInsert(k, val);
 		if (x == root)
 			root->color = BLACK;

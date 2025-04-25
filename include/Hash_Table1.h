@@ -126,7 +126,7 @@ public:
 	void insert(Tkey k, Tvalue v) {
 		int index = hash(k);
 		if (find(k) != end())
-			throw "This value already exists";
+			throw std::runtime_error("This value already exists");
 		table[index].push_front(std::make_pair(k, v));
 		sz++;
 		if ((double)sz / (double)capacity > 0.6f)
@@ -135,7 +135,7 @@ public:
 
 	iterator find(Tkey k) {
 		int i = hash(k);
-		std::list<std::pair<Tkey,Tvalue>>::iterator it = table[i].begin();
+		typename std::list<std::pair<Tkey,Tvalue>>::iterator it = table[i].begin();
 		while (it != table[i].end()) {
 			if (it->first == k)
 				return iterator(i, it, &table);
@@ -146,7 +146,7 @@ public:
 
 	void erase(Tkey k) {
 		int index = hash(k);
-		std::list<std::pair<Tkey, Tvalue>>::iterator it = table[index].begin();
+		typename std::list<std::pair<Tkey, Tvalue>>::iterator it = table[index].begin();
 		for (; it != table[index].end(); it++) {
 			if (it->first == k) {
 				table[index].erase(it);
@@ -154,7 +154,7 @@ public:
 				return;
 			}
 		}
-		throw "The value does not exist";
+		throw std::runtime_error("The value does not exist");
 	}
 
 	size_t size() {

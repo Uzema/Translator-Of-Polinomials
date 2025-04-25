@@ -1,11 +1,11 @@
-﻿#include"monom.h"
-#include"tlist.h"
+﻿#include "Monom.h"
+#include "tlist.h"
 
 class polynom {
 	List<monom> l;
 public:
 	polynom();
-	polynom(monom& m);
+	polynom(monom m);
 	void insert(double c, int exp);
 	monom operator[](int index);
 	void print();
@@ -18,7 +18,7 @@ public:
 	polynom operator/(monom& m);
 	polynom operator/(double c);
 
-	polynom& operator+=(polynom& p);
+	polynom& operator+=(polynom p);
 	polynom& operator-=(polynom& p);
 	polynom& operator*=(polynom& p);
 	polynom& operator*=(double c);

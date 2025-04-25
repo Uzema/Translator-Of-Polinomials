@@ -25,7 +25,7 @@ public:
 		}
 
 		iterator& operator--() {
-			ptr--
+			ptr--;
 			return *ptr;
 		}
 
@@ -69,7 +69,7 @@ public:
 				i--;
 			}
 			else if (table[i - 1].first == table[i].first)
-				throw "This value already exists";
+				throw std::runtime_error("This value already exists");
 			else
 				break;
 		}
@@ -93,7 +93,7 @@ public:
 	iterator erase(const Tkey& key) {
 		auto it = find(key);
 		if (it == end())
-			throw "The value does not exist";
+			throw std::runtime_error("The value does not exist");
 		for (int i = 0; i < table.size();i++) {
 			if (table[i].first == key) {
 				table.erase(table.begin() + i);

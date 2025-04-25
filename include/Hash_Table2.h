@@ -119,7 +119,7 @@ public:
 					continue;
 				}
 				else {
-					throw "didnt find";
+					throw std::runtime_error("didnt find");
 				}
 			}
 		} while (true);
@@ -145,7 +145,7 @@ public:
 					continue;
 				}
 				else {
-					throw "didnt find";
+					throw std::runtime_error("didnt find");
 				}
 			}
 		} while (true);

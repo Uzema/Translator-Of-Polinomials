@@ -1,12 +1,12 @@
-﻿#include<vector>
-#include<iostream>
-#include"polynomial.h"
+﻿#include <vector>
+#include <iostream>
+#include "Polynomial.h"
 
 polynom::polynom() {
 	List<monom> l;
 }
 
-polynom::polynom(monom& m) {
+polynom::polynom(monom m) {
 	polynom p;
 	p.l.insert(m, l.get_head());
 }
@@ -109,7 +109,7 @@ polynom polynom::operator+(polynom& p) {
 	return res;
 }
 
-polynom& polynom::operator+=(polynom& p) {
+polynom& polynom::operator+=(polynom p) {
 	List<monom>::iterator j = p.l.begin();
 	List<monom>::iterator i = this->l.begin();
 	List<monom>::iterator pr = this->l.end();
@@ -248,7 +248,7 @@ polynom& polynom::operator*=(double c) {
 }
 
 polynom polynom::operator/(double c) {
-	if (abs(c) < 0.0000000001) throw "division by zero";
+	if (abs(c) < 0.0000000001) throw std::runtime_error("division by zero");
 	polynom res = *this;
 	for (List<monom>::iterator i = res.l.begin(); i != res.l.end(); i++)
 		*i /= c;
@@ -256,7 +256,7 @@ polynom polynom::operator/(double c) {
 }
 
 polynom& polynom::operator/=(double c) {
-	if (abs(c) < 0.0000000001) throw "division by zero";
+	if (abs(c) < 0.0000000001) throw std::runtime_error("division by zero");
 	for (List<monom>::iterator i = this->l.begin(); i != this->l.end(); i++)
 		*i /= c;
 	return *this;
@@ -282,7 +282,7 @@ polynom& polynom::parser(std::string s) {
 				num += s[i];
 				if (s[i] == ',' || s[i] == '.')
 					k--;
-				if (k < 0) throw std::exception("Incorrect input");
+				if (k < 0) throw std::runtime_error("Incorrect input");
 				i++;
 			}
 			if (!num.empty()) {
@@ -290,7 +290,7 @@ polynom& polynom::parser(std::string s) {
 				i--;
 			}
 		}
-		else throw std::exception("Incorrect input");
+		else throw std::runtime_error("Incorrect input");
 	}
 
 	enum class state { S, Op, Num, Var, Exp, Mul, Error };
@@ -357,7 +357,7 @@ polynom& polynom::parser(std::string s) {
 	}
 
 	if (ka != state::Num && ka != state::Var)
-		throw std::exception("Incorrect input");
+		throw std::runtime_error("Incorrect input");
 
 	bool t = 1;
 	for (int i = 0; i < v.size(); i++) {
