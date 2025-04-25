@@ -1,0 +1,35 @@
+name: CI
+
+on:
+    push:
+    pull_request:
+
+jobs:
+    ubuntu-gcc-build:
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@v4
+        - name: Install dependencies
+          run: |
+             sudo apt-get install -y cmake g++
+        - name: Configure
+          run: |
+             cmake -B build -DCMAKE_BUILD_TYPE=Release
+        - name: Build
+          run: |
+             cmake --build build --parallel
+
+    windows-build:
+        runs-on: windows-latest
+        steps:
+        - uses: actions/checkout@v4
+        - name: Setup cmake
+          run: |
+             cmake --versions
+        - name: Configure
+          run: |
+             cmake -B build -G "Visual Studio 17 2022" -A x64
+        - name: Build
+          run: |
+             cmake --build build --parallel
+
