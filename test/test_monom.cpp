@@ -1,6 +1,6 @@
 #pragma once
 #include <gtest.h>
-#include "monom.h"
+#include "Monom.h"
 
 TEST(Monom, CreateMonom) {
 	ASSERT_NO_THROW(monom a);

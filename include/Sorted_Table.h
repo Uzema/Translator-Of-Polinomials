@@ -25,7 +25,7 @@ public:
 		}
 
 		iterator& operator--() {
-			ptr--
+			ptr--;
 			return *ptr;
 		}
 
@@ -97,7 +97,7 @@ public:
 	iterator erase(const Tkey& key) {
 		auto it = find(key);
 		if (it == end())
-			throw "The value does not exist";
+			throw std::runtime_error("The value does not exist");
 		for (int i = 0; i < table.size();i++) {
 			if (table[i].first == key) {
 				table.erase(table.begin() + i);

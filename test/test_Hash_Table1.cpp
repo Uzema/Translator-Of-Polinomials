@@ -1,6 +1,6 @@
 #pragma once
-#include<gtest.h>
-#include"Hash_Table1.h"
+#include <gtest.h>
+#include "Hash_Table1.h"
 #include "Polynomial.h"
 
 TEST(HashTable, createHashTable) {

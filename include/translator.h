@@ -11,7 +11,7 @@
 #include "Unsorted_Table.h"
 #include "Hash_Table1.h"
 #include "Hash_Table2.h"
-#include "BRtree.h"
+#include "BRTree.h"
 #include "AVLTree.h"
 
 class term {
@@ -165,7 +165,7 @@ static std::vector<term*> LexicalAnalyser(std::string str) {
 				res.push_back(new var(polynom(monom(stod(numstr),0))));
 			}
 
-			else throw "Error";
+			else throw std::runtime_error("Error");
 		}
 
 		if (str[i] >= 'a' && str[i] <= 'z' || str[i] >= 'A' && str[i] <= 'Z') {

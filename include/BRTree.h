@@ -302,7 +302,7 @@ private:
 				cur = cur->right;
 		}
 		if (!cur)
-			throw "Not existing element";
+			throw std::runtime_error("Not existing element");
 		node* d = cur;
 		if(cur->right && !cur->right->fict)
 			cur = cur->right;
