@@ -42,7 +42,7 @@ int main(int argc, char** argv) {
         else if (s1 == "help") {
             std::cout << "This is a help sheet!\n\
 You can chose different data structures by using swtich and its full name \nor the short notation in the brackets (case sensitive):\n\
-1) SortedTable (st) \n2) UnsortedTable (ut) \n3) BRtree (br) \n4) AVLtree (av) \n5) ChainedHashTable (ht/h1) \n6) ProbingHashTable (ho/h2)\n\
+1) SortedTable (st) \n2) UnsortedTable (ut) \n3) BRtree (br) \n4) AVLtree (av) \n5) ChainedHashTable (ht/h1) \n6) ProbingHashTable (ho/h2)\n\n\
 You can insert polynoms by using this syntax:\n\
 <key> = <your_polynom> (ex. a=16x^2yz)\n\
 <key> = <arithmetic actions with already existing polynoms> (ex. a=b+c)\n\

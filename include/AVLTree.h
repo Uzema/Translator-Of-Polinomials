@@ -231,7 +231,16 @@ public:
 		return *this;
 	}
 
-	void print() {
+	void print(int n = -1) {
+		int x = n;
+		if (n == -1) {
+			x = size();
+			n = x;
+		}
+		if (n > size() || n < 0) {
+			std::cout << "Out of range\n";
+			return;
+		}
 		print(root);
 		std::cout << size() << " rows\n";
 	}

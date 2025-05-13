@@ -126,7 +126,7 @@ public:
 	void insert(Tkey k, Tvalue v) {
 		int index = hash(k);
 		if (find(k) != end())
-			throw "This value already exists";
+			find(k)->second = v;
 		table[index].push_front(std::make_pair(k, v));
 		sz++;
 		if ((double)sz / (double)capacity > 0.6f)
@@ -161,11 +161,21 @@ public:
 		return sz;
 	}
 
-	void print() {
-		for (auto it = begin(); it != end(); ++it) {
+	void print(int n = -1) {
+		int x = n;
+		if (n == -1) {
+			x = size();
+			n = x;
+		}
+		if (n > size() || n < 0) {
+			std::cout << "Out of range\n";
+			return;
+		}
+		for (auto it = begin(); it != end(); ++it, n--) {
+			if (n <= 0) break;
 			std::cout << it->first << " = ";
 			it->second.print();
 		}
-		std::cout << sz << " rows\n";
+		std::cout << x << " rows\n";
 	}
 };

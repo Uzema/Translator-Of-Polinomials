@@ -94,11 +94,11 @@ TEST(BRtree, EraseFromTreeNotExistingElement) {
 	ASSERT_ANY_THROW(t.erase(2));
 }
 
-TEST(BRtree, ThrowWheninsertInTreeSimilarKey) {
-	BRtree<std::string, polynom> t;
-	polynom p = polynom(monom(1, 100));
-	t.insert("abc", p);
-	ASSERT_ANY_THROW(t.insert("abc", p));
+TEST(BRtree, insertInTreeSimilarKey) {
+	BRtree<std::string, int> t;
+	t.insert("abc", 4);
+	t.insert("abc", 8);
+	EXPECT_EQ(8, t.find("abc")->value);
 }
 
 TEST(BRtree, iteratorCycle) {

@@ -352,7 +352,7 @@ public:
 
 	void insert(Tkey k, Tvalue val) {
 		if (find(k) != iterator(nullptr))
-			throw "This value is alredy exist";
+			find(k)->value = val;
 		node* x = prInsert(k, val);
 		if (x == root)
 			root->color = BLACK;
@@ -370,11 +370,21 @@ public:
 		return sz == 0;
 	}
 
-	void print() {
-		for (auto it = begin(); it != end(); ++it) {
+	void print(int n = -1) {
+		int x = n;
+		if (n == -1) {
+			x = size();
+			n = x;
+		}
+		if (n > size() || n < 0) {
+			std::cout << "Out of range\n";
+			return;
+		}
+		for (auto it = begin(); it != end(); ++it, n--) {
+			if (n <= 0)break;
 			std::cout << it->key << " = ";
 			it->value.print();
 		}
-		std::cout << size() << " rows\n";
+		std::cout << x << " rows\n";
 	}
 };

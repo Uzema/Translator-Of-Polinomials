@@ -141,9 +141,17 @@ public:
 		} while (true);
 	}
 
+	void print() {
+		for (int i = 0; i < capacity; i++) {
+			if (table[i].getEmpty() == false) {
+				std::cout << table[i].getKey() << " = ";
+				table[i].getValue().print();
+			}
+		}
+		std::cout << size << " rows\n";
+	}
 
 	Tvalue operator[](Tkey key) {
 		return find(key).getValue();
 	}
-
 };

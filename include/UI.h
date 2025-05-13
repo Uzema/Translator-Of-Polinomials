@@ -14,19 +14,14 @@ class UserInterface {
 	Status status;
 
 public:
-
 	void process(std::string inp) {
 		inp.erase(std::remove_if(inp.begin(), inp.end(), ::isspace), inp.end());
 
 		if (inp.size() > 4 && inp.substr(0, 4) == "show") {
 			print(inp.substr(4, inp.size() - 1));
 		}
-		else if (inp == "show") {
-			print();
-		}
-		else if (inp == "status") {
-			stat();
-		}
+		else if (inp == "show") { print(); }
+		else if (inp == "status") {	stat();	}
 		else if (inp.size() > 6 && inp.substr(0, 6) == "switch") {
 			sw(inp.substr(6, inp.size() - 1));
 		}
@@ -63,11 +58,11 @@ private:
 	void print(std::string inp = "-1") {
 		int s = std::stoi(inp);
 		if (status == ST) st.print(s);
-		if (status == UT) ut.print();
-		if (status == BR) br.print();
+		if (status == UT) ut.print(s);
+		if (status == BR) br.print(s);
 		if (status == AV) av.print();
-		if (status == HT) ht.print();
-		//if (status == HO) ho.print();
+		if (status == HT) ht.print(s);
+		if (status == HO) ho.print();
 	}
 
 	void stat() {
@@ -112,8 +107,8 @@ private:
 				std::cout << e.what() << std::endl;
 			}
 		}
-		
 		vars[name] = p;
+		
 		if (status == ST) st.insert(name, p);
 		if (status == UT) ut.insert(name, p);
 		if (status == BR) br.insert(name, p);

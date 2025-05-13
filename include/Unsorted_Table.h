@@ -114,12 +114,22 @@ public:
 		return table.size();
 	}
 
-	void print() {
-		for (auto it = begin(); it != end(); ++it) {
+	void print(int n = -1) {
+		int x = n;
+		if (n == -1) {
+			x = size();
+			n = x;
+		}
+		if (n > size() || n < 0) {
+			std::cout << "Out of range\n";
+			return;
+		}
+		for (auto it = begin(); it != end(); ++it, n--) {
+			if (n <= 0) break;
 			std::cout << it->first << " = ";
 			it->second.print();
 		}
-		std::cout << size() << " rows\n";
+		std::cout << x << " rows\n";
 	}
 
 };

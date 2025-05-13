@@ -20,11 +20,12 @@ TEST(SortedTable, CorrectInsertionOrder) {
 	EXPECT_EQ("abd", t[2].first);
 }
 
-TEST(SortedTable, ThrowWhenInsertTwoIdencialElement) {
-	SortedTable<std::string, polynom> t;
-	polynom p = polynom(monom(1, 100));
-	t.insert("abc", p);
-	ASSERT_ANY_THROW(t.insert("abc", p));
+TEST(SortedTable, CorrectInsertTwoIdencialKey) {
+	SortedTable<std::string, int> t;
+	t.insert("abc", 11);
+	t.insert("abc", 13);
+	EXPECT_EQ(13, t[0].second);
+	EXPECT_EQ(1, t.size());
 }
 
 TEST(SortedTable, CorrectFindElement) {

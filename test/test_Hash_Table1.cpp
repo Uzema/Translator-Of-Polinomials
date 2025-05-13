@@ -15,11 +15,11 @@ TEST(HashTable, insertHashTable) {
 	EXPECT_EQ(1, h.size());
 }
 
-TEST(HashTable, throwWhenInsertTwoIdencialElementInHashTable) {
-	HashTable<std::string, polynom> h;
-	polynom p = polynom(monom(1, 100));
-	h.insert("abb", p);
-	ASSERT_ANY_THROW(h.insert("abb",p));
+TEST(HashTable, insertTwoIdencialElementInHashTable) {
+	HashTable<std::string, int> h;
+	h.insert("abb", 4);
+	h.insert("abb", 8);
+	EXPECT_EQ(8, h.find("abb")->second);
 }
 
 TEST(HashTable, findInHashTable) {

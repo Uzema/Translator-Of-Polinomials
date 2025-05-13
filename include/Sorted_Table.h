@@ -68,8 +68,12 @@ public:
 				std::swap(table[i - 1], table[i]);
 				i--;
 			}
-			else if (table[i - 1].first == table[i].first)
-				throw "This value already exists";
+			else if (table[i - 1].first == table[i].first) {
+				table[i - 1] = table[i];
+				std::swap(table[i - 1], table[table.size() - 1]);
+				table.pop_back();
+				break;
+			}
 			else
 				break;
 		}
