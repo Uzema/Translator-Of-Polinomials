@@ -48,10 +48,11 @@ class HashO {
 	};
 
 	std::vector<tuple> table;
-	int size = 0;
+	size_t size = 0;
 	int capacity;
 	int a, b;
 	int simpleNum = 1'000'000'007;
+	std::vector<int> simpleNums = { 157, 262127, 524287, 786433, 1048609, 1310719, 1572869 };
 
 public:
 
@@ -63,12 +64,49 @@ public:
 		b = abs(std::rand()) % simpleNum;
 	}
 
+	void repack() {
+		if (capacity == simpleNums[simpleNums.size() - 1]) {
+			return;
+		}
+		int newCapacity;
+		for (int i = 0; i < simpleNums.size(); i++) {
+			if (capacity == simpleNums[i]) {
+				newCapacity = simpleNums[i + 1];
+				break;
+			}
+		}
+		
+		std::vector<tuple> newTable(newCapacity);
+		for (int i = 0; i < table.capacity(); i++) {
+			if (!table[i].getEmpty()) {
+				int newIndex = Hash(table[i].getKey(), newCapacity);
+
+				while (!newTable[newIndex].getEmpty()) {
+					newIndex = (newIndex + 1) % newCapacity;
+				}
+
+				newTable[newIndex] = table[i];
+			}
+		}
+		table = std::move(newTable);
+		capacity = newCapacity;
+		
+	}
+
 	int Hash(std::string s) {
 		unsigned long long int x = 0;
 		for (int i = 0; i < s.size(); i++) {
 			x += (s[i] * (int)pow(31, i)) % simpleNum;
 		}
 		return ((a * x + b) % simpleNum) % capacity;
+	}
+
+	int Hash(std::string s, int newCapacity) {
+		unsigned long long int x = 0;
+		for (int i = 0; i < s.size(); i++) {
+			x += (s[i] * (int)pow(31, i)) % simpleNum;
+		}
+		return ((a * x + b) % simpleNum) % newCapacity;
 	}
 
 	void print() {
@@ -82,9 +120,6 @@ public:
 	}
 
 	void insert(Tkey key, Tvalue value) {
-		if (size == capacity) {
-			//repack
-		}
 
 		tuple t(key, value);
 		int index = Hash(key);
@@ -96,7 +131,10 @@ public:
 		if (table[index].getEmpty()) {
 			table[index] = t;
 			size++;
-			return;
+		}
+
+		if ((double)size / (double)capacity > 0.6f) {
+			repack();
 		}
 	}
 	
@@ -132,6 +170,7 @@ public:
 				if (table[index].getKey() == key) {
 					table[index].flag = true;
 					table[index].empty = true;
+					size--;
 					return;
 				}
 				else {
@@ -151,7 +190,9 @@ public:
 		} while (true);
 	}
 
-	
+	size_t getSize() {
+		return size;
+	}
 
 	Tvalue operator[](Tkey key) {
 		return find(key).getValue();
