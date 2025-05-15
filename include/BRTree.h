@@ -351,8 +351,10 @@ public:
 	}
 
 	void insert(Tkey k, Tvalue val) {
-		if (find(k) != iterator(nullptr))
+		if (find(k) != iterator(nullptr)) {
 			find(k)->value = val;
+			return;
+		}
 		node* x = prInsert(k, val);
 		if (x == root)
 			root->color = BLACK;

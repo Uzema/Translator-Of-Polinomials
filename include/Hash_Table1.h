@@ -125,8 +125,10 @@ public:
 
 	void insert(Tkey k, Tvalue v) {
 		int index = hash(k);
-		if (find(k) != end())
+		if (find(k) != end()) {
 			find(k)->second = v;
+			return;
+		}
 		table[index].push_front(std::make_pair(k, v));
 		sz++;
 		if ((double)sz / (double)capacity > 0.6f)
