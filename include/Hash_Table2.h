@@ -125,6 +125,10 @@ public:
 		int index = Hash(key);
 
 		while (!table[index].getEmpty()) {
+			if (table[index].getKey() == key) {
+				table[index] = t;
+				break;
+			}
 			index = (index + 1) % capacity;
 			continue;
 		}

@@ -71,11 +71,14 @@ public:
 	}
 
 	void insert(Tkey key, Tvalue val) {
-		if (find(key) == end()) {
+		iterator it = find(key);
+		if (it == end()) {
 			table.push_back(std::make_pair(key, val));
 		}
 		else {
-			throw std::runtime_error("Element with this key exists already");
+			//throw std::runtime_error("Element with this key exists already");
+			erase(it);
+			table.push_back(std::make_pair(key, val));
 		}
 	}
 
