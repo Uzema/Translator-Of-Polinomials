@@ -22,14 +22,15 @@ TEST(UnsortedTable, CorrectInsersionOrder) {
 	EXPECT_EQ("abb", t[3].first);
 }
 
-TEST(UnsortedTable, ThrowsWhenElemenetsWithSameKeyGetInserted) {
-	UnsortedTable<std::string, polynom> t;
-	polynom p = polynom(monom(1, 100));
-	t.insert("abd", p);
-	t.insert("abe", p);
-	t.insert("abc", p);
-	t.insert("abb", p);
-	ASSERT_ANY_THROW(t.insert("abc", p));
+TEST(UnsortedTable, ElemenetsWithSameKeyGetInserted) {
+	UnsortedTable<std::string, int> t;
+	t.insert("abd", 1);
+	t.insert("abe", 2);
+	t.insert("abc", 3);
+	t.insert("abb", 4);
+
+	t.insert("abc", 228);
+	EXPECT_EQ(228, t[3].second);
 }
 
 TEST(UnsortedTable, CorrectlyFindsElement) {
