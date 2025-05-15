@@ -54,16 +54,6 @@ class HashO {
 	int simpleNum = 1'000'000'007;
 	std::vector<int> simpleNums = { 157, 262127, 524287, 786433, 1048609, 1310719, 1572869 };
 
-public:
-
-	HashO() {
-		table.resize(157);
-		capacity = 157;
-		std::srand(std::time({}));
-		a = abs(std::rand() % (simpleNum) - 1) + 1;
-		b = abs(std::rand()) % simpleNum;
-	}
-
 	void repack() {
 		if (capacity == simpleNums[simpleNums.size() - 1]) {
 			return;
@@ -107,6 +97,16 @@ public:
 			x += (s[i] * (int)pow(31, i)) % simpleNum;
 		}
 		return ((a * x + b) % simpleNum) % newCapacity;
+	}
+
+public:
+
+	HashO() {
+		table.resize(157);
+		capacity = 157;
+		std::srand(std::time({}));
+		a = abs(std::rand() % (simpleNum)-1) + 1;
+		b = abs(std::rand()) % simpleNum;
 	}
 
 	void print() {
